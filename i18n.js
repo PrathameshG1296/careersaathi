@@ -1,4 +1,4 @@
-var LANGS = { en: "English", hi: "हिन्दी" };
+var LANGS = { en: "English", hi: "हिन्दी", mr: "मराठी" };
 var UI = {};
 var CAREER_TX = {};
 var currentLang = "en";
@@ -128,6 +128,66 @@ UI.hi = {
   not_added: "अभी जोड़ा नहीं गया"
 };
 
+UI.mr = {
+  title_home: "CareerSaathi - भारतीय विद्यार्थ्यांसाठी मोफत करिअर मार्गदर्शन",
+  title_explore: "करिअर पहा - CareerSaathi",
+  nav_home: "मुख्यपृष्ठ",
+  nav_explore: "करिअर पहा",
+  nav_finder: "करिअर फाइंडर",
+  nav_about: "आमच्याबद्दल",
+  hero_title: "तुमचे पुढचे पाऊल समजून घ्या",
+  hero_sub: "भारतातील प्रत्येक विद्यार्थ्यासाठी मोफत करिअर मार्गदर्शन: दहावी, बारावी आणि पदवीनंतर.",
+  btn_explore: "करिअर पहा",
+  btn_finder: "करिअर फाइंडर सुरू करा",
+  choose_stage: "तुमचा टप्पा निवडा",
+  choose_sub: "तुम्ही सध्या कुठे आहात ते निवडा आणि तुमच्यासाठी कोणते पर्याय आहेत ते पहा.",
+  stage_class10: "दहावीनंतर",
+  stage_class12: "बारावीनंतर",
+  stage_graduation: "पदवीनंतर",
+  stage_iti: "ITI आणि डिप्लोमा",
+  stage_govt: "सरकारी नोकरी आणि परीक्षा",
+  stage_skills: "कौशल्ये आणि प्रमाणपत्रे",
+  stage_jobs: "नोकरी आणि इंटर्नशिप",
+  stage_freelancing: "फ्रीलान्सिंग",
+  stage_business: "स्वतःचा व्यवसाय सुरू करणे",
+  desc_class10: "शाखा निवडणे, डिप्लोमा, ITI आणि इतर पर्याय.",
+  desc_class12: "पदवी अभ्यासक्रम, प्रवेश परीक्षा आणि करिअरचे मार्ग.",
+  desc_graduation: "पुढील शिक्षण, नोकऱ्या आणि स्पर्धा परीक्षा.",
+  desc_iti: "लवकर काम सुरू करण्यास मदत करणारे व्यावहारिक अभ्यासक्रम.",
+  desc_govt: "सरकारी नोकरी आणि स्पर्धा परीक्षांची माहिती.",
+  desc_skills: "कौशल्ये आणि रिझ्युमे मजबूत करणारे छोटे अभ्यासक्रम.",
+  desc_jobs: "पहिली नोकरी, इंटर्नशिप आणि अप्रेंटिसशिपचे मार्ग.",
+  desc_freelancing: "तुमच्या कौशल्यातून घरबसल्या काम कसे सुरू करावे.",
+  desc_business: "छोटा व्यवसाय सुरू करण्याच्या व्यावहारिक पायऱ्या.",
+  note_bold: "एक महत्त्वाची गोष्ट:",
+  note_text: "CareerSaathi सर्वसाधारण मार्गदर्शन देते. फी, पात्रता आणि तारखा दरवर्षी बदलतात, म्हणून नेहमी अधिकृत वेबसाइट तपासा.",
+  footer_disclaimer: "CareerSaathi फक्त सर्वसाधारण मार्गदर्शन देते. फी, पात्रता आणि तारखा नेहमी अधिकृत वेबसाइटवर तपासा. आम्ही प्रवेश, नोकरी किंवा पगाराची हमी देत नाही.",
+  footer_copy: "© CareerSaathi",
+  explore_title: "करिअर पहा",
+  explore_sub: "हे चाचणीसाठी नमुना रेकॉर्ड आहेत. खरी, पडताळलेली माहिती लवकरच जोडली जाईल.",
+  all: "सर्व",
+  coming_soon: "या विभागाची माहिती लवकरच येत आहे.",
+  back: "← करिअर यादीकडे परत",
+  not_found: "हे करिअर रेकॉर्ड सापडले नाही.",
+  label_min_qual: "किमान पात्रता",
+  label_duration: "कालावधी",
+  label_fees: "अंदाजे फी",
+  fee_small: "ही सर्वसाधारण नोंद आहे, अधिकृत फी यादी नाही.",
+  label_skills: "आवश्यक कौशल्ये",
+  label_jobs: "संभाव्य नोकरीच्या भूमिका किंवा पुढील पर्याय",
+  label_steps: "व्यावहारिक पुढील पावले",
+  label_source_box: "स्रोत आणि पडताळणी",
+  label_source: "स्रोत:",
+  label_last_verified: "शेवटची पडताळणी:",
+  label_status: "स्थिती:",
+  sample_note: "ही नमुना माहिती आहे. कोणताही निर्णय घेण्यापूर्वी अधिकृत वेबसाइटवर माहिती नक्की तपासा.",
+  verify_btn: "अधिकृत वेबसाइटवर तपासा",
+  verify_disabled: "पडताळणीनंतर अधिकृत लिंक जोडली जाईल",
+  status_needs: "पडताळणी बाकी",
+  not_verified: "अजून पडताळलेले नाही",
+  not_added: "अजून जोडलेले नाही"
+};
+
 function t(key) {
   if (UI[currentLang] && UI[currentLang][key] !== undefined) { return UI[currentLang][key]; }
   if (UI.en[key] !== undefined) { return UI.en[key]; }
@@ -167,4 +227,20 @@ function buildLangSwitcher() {
   var inner = document.querySelector(".header-inner");
   if (!inner) { return; }
   var style = document.createElement("style");
-  style.textContent = ".lang-select{font-size:1rem;padding:6px 10px;border:2px solid
+  style.textContent = ".lang-select{font-size:1rem;padding:6px 10px;border:2px solid #1f4fa3;border-radius:10px;background:#fff;color:#1f4fa3;font-family:inherit;}";
+  document.head.appendChild(style);
+
+  var sel = document.createElement("select");
+  sel.id = "lang-select";
+  sel.className = "lang-select";
+  sel.setAttribute("aria-label", "Language");
+  Object.keys(LANGS).forEach(function (code) {
+    var opt = document.createElement("option");
+    opt.value = code;
+    opt.textContent = LANGS[code];
+    sel.appendChild(opt);
+  });
+  sel.value = currentLang;
+  sel.addEventListener("change", function () { setLang(sel.value); });
+  inner.appendChild(sel);
+}
