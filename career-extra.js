@@ -83,3 +83,6 @@ var EXTRA = {
     }
   }
 };
+EXTRA["iti-electrician"].en.percent.push('<a href="iti.html"><strong>See all ITI trades, fees and pay →</strong></a>');
+EXTRA["iti-electrician"].hi.percent.push('<a href="iti.html"><strong>सभी ITI ट्रेड, फीस और कमाई देखें →</strong></a>');
+EXTRA["iti-electrician"].mr.percent.push('<a href="iti.html"><strong>सर्व ITI ट्रेड, फी आणि कमाई पहा →</strong></a>');
