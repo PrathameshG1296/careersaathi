@@ -13,10 +13,10 @@
     <div class="header-inner">
       <a href="index.html" class="logo">Career<span>Saathi</span></a>
       <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="careers.html">Explore Careers</a>
-        <a href="finder.html">Career Finder</a>
-        <a href="about.html">About</a>
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <a href="careers.html" data-i18n="nav_explore">Explore Careers</a>
+        <a href="finder.html" data-i18n="nav_finder">Career Finder</a>
+        <a href="about.html" data-i18n="nav_about">About</a>
       </nav>
     </div>
   </header>
@@ -24,11 +24,13 @@
   <section class="section" id="detail"></section>
 
   <footer class="footer">
-    <p>CareerSaathi gives general guidance only. Always verify fees, eligibility and dates on official websites. We do not guarantee admission, jobs or salary.</p>
-    <p>&copy; CareerSaathi</p>
+    <p data-i18n="footer_disclaimer">CareerSaathi gives general guidance only. Always verify fees, eligibility and dates on official websites. We do not guarantee admission, jobs or salary.</p>
+    <p data-i18n="footer_copy">&copy; CareerSaathi</p>
   </footer>
 
+  <script src="i18n.js"></script>
   <script src="careers-data.js"></script>
+  <script src="careers-hi.js"></script>
   <script>
     var slug = new URLSearchParams(window.location.search).get("slug");
     var career = CAREERS.find(function (c) { return c.slug === slug; });
@@ -39,39 +41,49 @@
       return "<" + tag + ">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</" + tag + ">";
     }
 
-    if (!career) {
-      box.innerHTML = '<a class="back-link" href="careers.html">&larr; Back to careers</a>' +
-        '<div class="empty">Ye career record nahi mila.</div>';
-    } else {
-      document.title = career.title + " - CareerSaathi";
+    function renderPage() {
+      if (!career) {
+        document.title = "CareerSaathi";
+        box.innerHTML = '<a class="back-link" href="careers.html">' + t("back") + '</a>' +
+          '<div class="empty">' + t("not_found") + '</div>';
+        return;
+      }
+
+      document.title = tc(career, "title") + " - CareerSaathi";
 
       var official = career.sourceUrl
-        ? '<a class="btn btn-orange" href="' + career.sourceUrl + '" target="_blank" rel="noopener">Verify on official website</a>'
-        : '<span class="btn btn-disabled">Official link will be added after verification</span>';
+        ? '<a class="btn btn-orange" href="' + career.sourceUrl + '" target="_blank" rel="noopener">' + t("verify_btn") + '</a>'
+        : '<span class="btn btn-disabled">' + t("verify_disabled") + '</span>';
+
+      var sourceName = tc(career, "sourceName") || t("not_added");
 
       box.innerHTML =
-        '<a class="back-link" href="careers.html">&larr; Back to careers</a>' +
-        '<span class="tag">' + career.category + '</span>' +
-        '<span class="tag">' + career.level + '</span>' +
-        '<span class="tag warn">' + career.status + '</span>' +
-        '<h1 style="color:var(--blue);margin:8px 0 6px">' + career.title + '</h1>' +
-        '<p style="margin-bottom:18px">' + career.summary + '</p>' +
+        '<a class="back-link" href="careers.html">' + t("back") + '</a>' +
+        '<span class="tag">' + tc(career, "category") + '</span>' +
+        '<span class="tag">' + tc(career, "level") + '</span>' +
+        '<span class="tag warn">' + statusLabel(career.status) + '</span>' +
+        '<h1 style="color:var(--blue);margin:8px 0 6px">' + tc(career, "title") + '</h1>' +
+        '<p style="margin-bottom:18px">' + tc(career, "summary") + '</p>' +
 
-        '<div class="detail-box"><h2>Minimum qualification</h2><p>' + career.minQualification + '</p></div>' +
-        '<div class="detail-box"><h2>Duration</h2><p>' + career.duration + '</p></div>' +
-        '<div class="detail-box"><h2>Estimated fees</h2><p>' + career.fee + '</p>' +
-          '<p class="small">This is a general note, not an official fee list.</p></div>' +
-        '<div class="detail-box"><h2>Skills needed</h2>' + listHtml(career.skills, false) + '</div>' +
-        '<div class="detail-box"><h2>Possible job roles or next options</h2>' + listHtml(career.jobs, false) + '</div>' +
-        '<div class="detail-box"><h2>Practical next steps</h2>' + listHtml(career.steps, true) + '</div>' +
+        '<div class="detail-box"><h2>' + t("label_min_qual") + '</h2><p>' + tc(career, "minQualification") + '</p></div>' +
+        '<div class="detail-box"><h2>' + t("label_duration") + '</h2><p>' + tc(career, "duration") + '</p></div>' +
+        '<div class="detail-box"><h2>' + t("label_fees") + '</h2><p>' + tc(career, "fee") + '</p>' +
+          '<p class="small">' + t("fee_small") + '</p></div>' +
+        '<div class="detail-box"><h2>' + t("label_skills") + '</h2>' + listHtml(tc(career, "skills"), false) + '</div>' +
+        '<div class="detail-box"><h2>' + t("label_jobs") + '</h2>' + listHtml(tc(career, "jobs"), false) + '</div>' +
+        '<div class="detail-box"><h2>' + t("label_steps") + '</h2>' + listHtml(tc(career, "steps"), true) + '</div>' +
 
-        '<div class="detail-box"><h2>Source and verification</h2>' +
-          '<p><strong>Source:</strong> ' + (career.sourceName || "Not added yet") + '</p>' +
-          '<p><strong>Last verified:</strong> ' + career.lastVerified + '</p>' +
-          '<p><strong>Status:</strong> ' + career.status + '</p>' +
-          '<p class="small" style="margin:8px 0 14px">This is sample information. Always confirm details on the official website before making decisions.</p>' +
+        '<div class="detail-box"><h2>' + t("label_source_box") + '</h2>' +
+          '<p><strong>' + t("label_source") + '</strong> ' + sourceName + '</p>' +
+          '<p><strong>' + t("label_last_verified") + '</strong> ' + verifiedLabel(career.lastVerified) + '</p>' +
+          '<p><strong>' + t("label_status") + '</strong> ' + statusLabel(career.status) + '</p>' +
+          '<p class="small" style="margin:8px 0 14px">' + t("sample_note") + '</p>' +
           official + '</div>';
     }
+
+    buildLangSwitcher();
+    applyStatic();
+    renderPage();
   </script>
 </body>
 </html>
