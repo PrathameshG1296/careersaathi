@@ -32,6 +32,7 @@
   <script src="careers-data.js"></script>
   <script src="careers-hi.js"></script>
   <script src="careers-mr.js"></script>
+  <script src="career-extra.js"></script>
   <script>
     var slug = new URLSearchParams(window.location.search).get("slug");
     var career = CAREERS.find(function (c) { return c.slug === slug; });
@@ -40,6 +41,16 @@
     function listHtml(items, ordered) {
       var tag = ordered ? "ol" : "ul";
       return "<" + tag + ">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</" + tag + ">";
+    }
+
+    function extraHtml() {
+      var all = EXTRA[career.slug];
+      if (!all) { return ""; }
+      var ex = all[currentLang] || all.en;
+      return '<div class="detail-box"><h2>' + t("extra_percent") + '</h2>' + listHtml(ex.percent, false) + '</div>' +
+             '<div class="detail-box"><h2>' + t("extra_fees") + '</h2>' + listHtml(ex.fees, false) + '</div>' +
+             '<div class="detail-box"><h2>' + t("extra_pay") + '</h2>' + listHtml(ex.pay, false) + '</div>' +
+             '<div class="note" style="margin-bottom:16px"><strong>' + t("extra_note_title") + ':</strong> ' + ex.note + '</div>';
     }
 
     function renderPage() {
@@ -67,6 +78,7 @@
         '<p style="margin-bottom:18px">' + tc(career, "summary") + '</p>' +
 
         '<div class="detail-box"><h2>' + t("label_min_qual") + '</h2><p>' + tc(career, "minQualification") + '</p></div>' +
+        extraHtml() +
         '<div class="detail-box"><h2>' + t("label_duration") + '</h2><p>' + tc(career, "duration") + '</p></div>' +
         '<div class="detail-box"><h2>' + t("label_fees") + '</h2><p>' + tc(career, "fee") + '</p>' +
           '<p class="small">' + t("fee_small") + '</p></div>' +
