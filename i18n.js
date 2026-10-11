@@ -67,6 +67,7 @@ UI.en = {
   not_verified: "Not verified yet",
   not_added: "Not added yet"
 };
+
 UI.hi = {
   title_home: "CareerSaathi - भारतीय विद्यार्थियों के लिए मुफ़्त करियर मार्गदर्शन",
   title_explore: "करियर देखें - CareerSaathi",
@@ -166,20 +167,4 @@ function buildLangSwitcher() {
   var inner = document.querySelector(".header-inner");
   if (!inner) { return; }
   var style = document.createElement("style");
-  style.textContent = ".lang-select{font-size:1rem;padding:6px 10px;border:2px solid #1f4fa3;border-radius:10px;background:#fff;color:#1f4fa3;font-family:inherit;}";
-  document.head.appendChild(style);
-
-  var sel = document.createElement("select");
-  sel.id = "lang-select";
-  sel.className = "lang-select";
-  sel.setAttribute("aria-label", "Language");
-  Object.keys(LANGS).forEach(function (code) {
-    var opt = document.createElement("option");
-    opt.value = code;
-    opt.textContent = LANGS[code];
-    sel.appendChild(opt);
-  });
-  sel.value = currentLang;
-  sel.addEventListener("change", function () { setLang(sel.value); });
-  inner.appendChild(sel);
-}
+  style.textContent = ".lang-select{font-size:1rem;padding:6px 10px;border:2px solid
