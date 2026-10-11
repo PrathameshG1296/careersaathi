@@ -13,17 +13,17 @@
     <div class="header-inner">
       <a href="index.html" class="logo">Career<span>Saathi</span></a>
       <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="careers.html">Explore Careers</a>
-        <a href="finder.html">Career Finder</a>
-        <a href="about.html">About</a>
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <a href="careers.html" data-i18n="nav_explore">Explore Careers</a>
+        <a href="finder.html" data-i18n="nav_finder">Career Finder</a>
+        <a href="about.html" data-i18n="nav_about">About</a>
       </nav>
     </div>
   </header>
 
   <div class="page-title">
-    <h1>Explore Careers</h1>
-    <p>Sample records for testing. Real, verified information will be added soon.</p>
+    <h1 data-i18n="explore_title">Explore Careers</h1>
+    <p data-i18n="explore_sub">Sample records for testing. Real, verified information will be added soon.</p>
   </div>
 
   <section class="section">
@@ -32,23 +32,26 @@
   </section>
 
   <footer class="footer">
-    <p>CareerSaathi gives general guidance only. Always verify fees, eligibility and dates on official websites. We do not guarantee admission, jobs or salary.</p>
-    <p>&copy; CareerSaathi</p>
+    <p data-i18n="footer_disclaimer">CareerSaathi gives general guidance only. Always verify fees, eligibility and dates on official websites. We do not guarantee admission, jobs or salary.</p>
+    <p data-i18n="footer_copy">&copy; CareerSaathi</p>
   </footer>
 
+  <script src="i18n.js"></script>
   <script src="careers-data.js"></script>
+  <script src="careers-hi.js"></script>
   <script>
     var params = new URLSearchParams(window.location.search);
     var current = params.get("stage") || "all";
     if (current !== "all" && !STAGE_LABELS[current]) { current = "all"; }
 
-    function render() {
+    function renderPage() {
+      document.title = t("title_explore");
       var filters = document.getElementById("filters");
       var grid = document.getElementById("career-grid");
 
-      var html = '<button class="filter-btn' + (current === "all" ? " active" : "") + '" data-stage="all">All</button>';
+      var html = '<button class="filter-btn' + (current === "all" ? " active" : "") + '" data-stage="all">' + t("all") + '</button>';
       Object.keys(STAGE_LABELS).forEach(function (key) {
-        html += '<button class="filter-btn' + (current === key ? " active" : "") + '" data-stage="' + key + '">' + STAGE_LABELS[key] + '</button>';
+        html += '<button class="filter-btn' + (current === key ? " active" : "") + '" data-stage="' + key + '">' + t("stage_" + key) + '</button>';
       });
       filters.innerHTML = html;
 
@@ -57,17 +60,17 @@
       });
 
       if (list.length === 0) {
-        grid.innerHTML = '<div class="empty" style="grid-column:1/-1">Is section ki jaankari jald aa rahi hai (coming soon).</div>';
+        grid.innerHTML = '<div class="empty" style="grid-column:1/-1">' + t("coming_soon") + '</div>';
         return;
       }
 
       grid.innerHTML = list.map(function (c) {
         return '<a class="card" href="career.html?slug=' + c.slug + '">' +
-          '<span class="tag">' + c.category + '</span>' +
-          '<span class="tag">' + c.level + '</span>' +
-          '<h3>' + c.title + '</h3>' +
-          '<p>' + c.summary + '</p>' +
-          '<span class="tag warn">' + c.status + '</span>' +
+          '<span class="tag">' + tc(c, "category") + '</span>' +
+          '<span class="tag">' + tc(c, "level") + '</span>' +
+          '<h3>' + tc(c, "title") + '</h3>' +
+          '<p>' + tc(c, "summary") + '</p>' +
+          '<span class="tag warn">' + statusLabel(c.status) + '</span>' +
           '</a>';
       }).join("");
     }
@@ -76,10 +79,12 @@
       var btn = e.target.closest("button");
       if (!btn) { return; }
       current = btn.getAttribute("data-stage");
-      render();
+      renderPage();
     });
 
-    render();
+    buildLangSwitcher();
+    applyStatic();
+    renderPage();
   </script>
 </body>
 </html>
