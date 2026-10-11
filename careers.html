@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Explore Careers - CareerSaathi</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="careers.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Career<span>Saathi</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="careers.html">Explore Careers</a>
+        <a href="finder.html">Career Finder</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-title">
+    <h1>Explore Careers</h1>
+    <p>Sample records for testing. Real, verified information will be added soon.</p>
+  </div>
+
+  <section class="section">
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="career-grid"></div>
+  </section>
+
+  <footer class="footer">
+    <p>CareerSaathi gives general guidance only. Always verify fees, eligibility and dates on official websites. We do not guarantee admission, jobs or salary.</p>
+    <p>&copy; CareerSaathi</p>
+  </footer>
+
+  <script src="careers-data.js"></script>
+  <script>
+    var params = new URLSearchParams(window.location.search);
+    var current = params.get("stage") || "all";
+    if (current !== "all" && !STAGE_LABELS[current]) { current = "all"; }
+
+    function render() {
+      var filters = document.getElementById("filters");
+      var grid = document.getElementById("career-grid");
+
+      var html = '<button class="filter-btn' + (current === "all" ? " active" : "") + '" data-stage="all">All</button>';
+      Object.keys(STAGE_LABELS).forEach(function (key) {
+        html += '<button class="filter-btn' + (current === key ? " active" : "") + '" data-stage="' + key + '">' + STAGE_LABELS[key] + '</button>';
+      });
+      filters.innerHTML = html;
+
+      var list = CAREERS.filter(function (c) {
+        return current === "all" || c.stages.indexOf(current) !== -1;
+      });
+
+      if (list.length === 0) {
+        grid.innerHTML = '<div class="empty" style="grid-column:1/-1">Is section ki jaankari jald aa rahi hai (coming soon).</div>';
+        return;
+      }
+
+      grid.innerHTML = list.map(function (c) {
+        return '<a class="card" href="career.html?slug=' + c.slug + '">' +
+          '<span class="tag">' + c.category + '</span>' +
+          '<span class="tag">' + c.level + '</span>' +
+          '<h3>' + c.title + '</h3>' +
+          '<p>' + c.summary + '</p>' +
+          '<span class="tag warn">' + c.status + '</span>' +
+          '</a>';
+      }).join("");
+    }
+
+    document.getElementById("filters").addEventListener("click", function (e) {
+      var btn = e.target.closest("button");
+      if (!btn) { return; }
+      current = btn.getAttribute("data-stage");
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
