@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ITI Trades, Fees and Pay - CareerSaathi</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="careers.css">
+  <style>
+    .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 12px; }
+    .two-col .detail-box { margin: 0; }
+    .block { margin-bottom: 28px; }
+    .block > h2 { color: var(--blue); font-size: 1.4rem; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Career<span>Saathi</span></a>
+      <nav class="nav">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <a href="careers.html" data-i18n="nav_explore">Explore Careers</a>
+        <a href="finder.html" data-i18n="nav_finder">Career Finder</a>
+        <a href="about.html" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-title">
+    <h1 id="p-title"></h1>
+    <p id="p-sub"></p>
+  </div>
+
+  <section class="section" id="content"></section>
+
+  <footer class="footer">
+    <p data-i18n="footer_disclaimer">CareerSaathi gives general guidance only. Always verify fees, eligibility and dates on official websites. We do not guarantee admission, jobs or salary.</p>
+    <p data-i18n="footer_copy">© CareerSaathi</p>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="iti-data.js"></script>
+  <script>
+    var itiFilter = "all";
+
+    function ul(items) {
+      return "<ul>" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>";
+    }
+
+    function tradeVisible(tr) {
+      if (itiFilter === "all") { return true; }
+      if (itiFilter === "1") { return tr.years === 1; }
+      if (itiFilter === "2") { return tr.years === 2; }
+      if (itiFilter === "noms") { return tr.ms === false; }
+      return true;
+    }
+
+    function renderPage() {
+      document.title = it("title") + " - CareerSaathi";
+      document.getElementById("p-title").textContent = it("title");
+      document.getElementById("p-sub").textContent = it("sub");
+
+      var filters = [["all", "f_all"], ["1", "f_1"], ["2", "f_2"], ["noms", "f_noms"]];
+      var fHtml = filters.map(function (f) {
+        return '<button class="filter-btn' + (itiFilter === f[0] ? " active" : "") + '" data-f="' + f[0] + '">' + it(f[1]) + '</button>';
+      }).join("");
+
+      var cards = ITI_TRADES.filter(tradeVisible).map(function (tr) {
+        var name = tr.names[currentLang] || tr.names.en;
+        return '<div class="detail-box" style="margin:0">' +
+          '<h3 style="color:var(--blue);margin-bottom:8px">' + name + '</h3>' +
+          '<p><strong>' + it("l_dur") + '</strong> ' + it("dur_" + tr.years) + '</p>' +
+          '<p><strong>' + it("l_elig") + '</strong> ' + it(tr.elig) + '</p>' +
+          '</div>';
+      }).join("");
+
+      var html =
+        '<div class="note block">' + it("disc") + '</div>' +
+
+        '<div class="block"><h2>' + it("h35") + '</h2><div class="detail-box">' + ul(it("p35")) + '</div></div>' +
+
+        '<div class="block"><h2>' + it("htrades") + '</h2><p class="sub">' + it("trades_sub") + '</p>' +
+          '<div class="filters">' + fHtml + '</div>' +
+          '<div class="grid">' + cards + '</div></div>' +
+
+        '<div class="block"><h2>' + it("hfees") + '</h2><div class="two-col">' +
+          '<div class="detail-box"><h2>' + it("fg_title") + '</h2>' + ul(it("fg")) + '</div>' +
+          '<div class="detail-box"><h2>' + it("fp_title") + '</h2>' + ul(it("fp")) + '</div>' +
+          '</div><p class="small">' + it("fees_more") + '</p></div>' +
+
+        '<div class="block"><h2>' + it("hpay") + '</h2><div class="two-col">' +
+          '<div class="detail-box"><h2>' + it("pp_title") + '</h2>' + ul(it("pp")) + '</div>' +
+          '<div class="detail-box"><h2>' + it("pg_title") + '</h2>' + ul(it("pg")) + '</div>' +
+          '</div><p class="small">' + it("pay_note") + '</p></div>' +
+
+        '<div class="block"><h2>' + it("hfind") + '</h2><div class="detail-box">' + ul(it("find")) + '</div></div>' +
+
+        '<div class="note">' + it("final") + '</div>';
+
+      document.getElementById("content").innerHTML = html;
+    }
+
+    document.getElementById("content").addEventListener("click", function (e) {
+      var btn = e.target.closest("button");
+      if (!btn || !btn.getAttribute("data-f")) { return; }
+      itiFilter = btn.getAttribute("data-f");
+      renderPage();
+    });
+
+    buildLangSwitcher();
+    applyStatic();
+    renderPage();
+  </script>
+</body>
+</html>
