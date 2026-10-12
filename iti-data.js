@@ -228,3 +228,6 @@ function it(key) {
   if (l && l[key] !== undefined) { return l[key]; }
   return ITI_T.en[key];
 }
+ITI_T.en.find.push("See also: <a href='states.html'><strong>State-wise ITI information</strong></a> | <a href='diploma.html'><strong>Diploma courses</strong></a>");
+ITI_T.hi.find.push("यह भी देखें: <a href='states.html'><strong>राज्यवार ITI जानकारी</strong></a> | <a href='diploma.html'><strong>डिप्लोमा कोर्स</strong></a>");
+ITI_T.mr.find.push("हेही पहा: <a href='states.html'><strong>राज्यानुसार ITI माहिती</strong></a> | <a href='diploma.html'><strong>डिप्लोमा अभ्यासक्रम</strong></a>");
