@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>State-wise ITI - CareerSaathi</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="careers.css">
+  <style>
+    .state-select { font-size: 1.05rem; padding: 12px 14px; border: 2px solid var(--blue); border-radius: 12px; background: #fff; color: var(--blue-dark); font-family: inherit; width: 100%; max-width: 420px; }
+    .block { margin-bottom: 24px; }
+    .block > h2 { color: var(--blue); font-size: 1.4rem; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Career<span>Saathi</span></a>
+      <nav class="nav">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <a href="careers.html" data-i18n="nav_explore">Explore Careers</a>
+        <a href="finder.html" data-i18n="nav_finder">Career Finder</a>
+        <a href="about.html" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-title">
+    <h1 id="p-title"></h1>
+    <p id="p-sub"></p>
+  </div>
+
+  <section class="section">
+    <div class="note block" id="p-disc"></div>
+    <div class="block">
+      <h2 id="p-choose"></h2>
+      <select id="state-select" class="state-select"></select>
+    </div>
+    <div id="state-result"></div>
+    <p class="small" id="p-see" style="margin-top:20px"></p>
+    <div class="note" id="p-final" style="margin-top:16px"></div>
+  </section>
+
+  <footer class="footer">
+    <p data-i18n="footer_disclaimer">CareerSaathi gives general guidance only. Always verify fees, eligibility and dates on official websites. We do not guarantee admission, jobs or salary.</p>
+    <p data-i18n="footer_copy">© CareerSaathi</p>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="states-data.js"></script>
+  <script>
+    var chosenState = "";
+
+    function ul(items) {
+      return "<ul>" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>";
+    }
+
+    function renderPage() {
+      document.title = st("title") + " - CareerSaathi";
+      document.getElementById("p-title").textContent = st("title");
+      document.getElementById("p-sub").textContent = st("sub");
+      document.getElementById("p-disc").textContent = st("disc");
+      document.getElementById("p-choose").textContent = st("choose");
+      document.getElementById("p-see").innerHTML = st("see");
+      document.getElementById("p-final").textContent = st("final");
+
+      var sel = document.getElementById("state-select");
+      var opts = '<option value="">' + st("pick") + '</option>';
+      ST_LIST.forEach(function (name) {
+        opts += '<option value="' + name + '"' + (chosenState === name ? " selected" : "") + '>' + name + '</option>';
+      });
+      sel.innerHTML = opts;
+
+      var out = document.getElementById("state-result");
+      if (!chosenState) { out.innerHTML = ""; return; }
+
+      var key = ST_INFO[chosenState];
+      if (key) {
+        out.innerHTML = '<div class="block"><h2>' + st(key + "_title") + '</h2><div class="detail-box">' + ul(st(key)) + '</div></div>';
+      } else {
+        out.innerHTML = '<div class="block"><h2>' + chosenState + ': ' + st("none_title") + '</h2><div class="detail-box">' + ul(st("none")) + '</div></div>';
+      }
+    }
+
+    document.getElementById("state-select").addEventListener("change", function (e) {
+      chosenState = e.target.value;
+      renderPage();
+    });
+
+    buildLangSwitcher();
+    applyStatic();
+    renderPage();
+  </script>
+</body>
+</html>
