@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About - CareerSaathi</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="careers.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Career<span>Saathi</span></a>
+      <nav class="nav">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <a href="careers.html" data-i18n="nav_explore">Explore Careers</a>
+        <a href="finder.html" data-i18n="nav_finder">Career Finder</a>
+        <a href="about.html" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-title">
+    <h1 id="p-title"></h1>
+    <p id="p-sub"></p>
+  </div>
+
+  <section class="section" id="content"></section>
+
+  <footer class="footer">
+    <p data-i18n="footer_disclaimer">CareerSaathi gives general guidance only. Always verify fees, eligibility and dates on official websites. We do not guarantee admission, jobs or salary.</p>
+    <p data-i18n="footer_copy">© CareerSaathi</p>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script>
+    var ABOUT = {
+      en: {
+        title: "About CareerSaathi",
+        sub: "Free career guidance for every student in India.",
+        boxes: [
+          ["Why we exist", "Many students, especially from ordinary and low-income families, do not have access to a career counsellor. CareerSaathi explains the options after Class 10, Class 12 and graduation in simple language, for free."],
+          ["What you will find here", "Courses and careers, how long they take, rough fees, pay examples, step-by-step roadmaps, and links to official websites. Information is available in English, Hindi and Marathi."],
+          ["How we handle accuracy", "We use official sources where we can. Figures that we could not verify are clearly marked as rough estimates or 'needs verification'. Fees, eligibility and dates change every year, so please always confirm on the official website."],
+          ["What we do not do", "We do not promise admission, jobs, salary or promotion. The Career Finder is not a scientific test and cannot tell your ability or future. We do not ask for Aadhaar numbers or other sensitive personal details."],
+          ["Found a mistake?", "Information can be outdated or wrong. Please check official sources before making any decision, and talk to a teacher, counsellor or a trusted person."]
+        ]
+      },
+      hi: {
+        title: "CareerSaathi के बारे में",
+        sub: "भारत के हर विद्यार्थी के लिए मुफ़्त करियर मार्गदर्शन।",
+        boxes: [
+          ["हम क्यों हैं", "कई विद्यार्थियों, ख़ासकर साधारण और कम आय वाले परिवारों के बच्चों के पास करियर काउंसलर तक पहुँच नहीं होती। CareerSaathi कक्षा 10, कक्षा 12 और ग्रेजुएशन के बाद के विकल्प सरल भाषा में, मुफ़्त समझाता है।"],
+          ["यहाँ आपको क्या मिलेगा", "कोर्स और करियर, उनमें लगने वाला समय, मोटी फीस, कमाई के उदाहरण, कदम-दर-कदम रोडमैप और आधिकारिक वेबसाइटों के लिंक। जानकारी अंग्रेज़ी, हिंदी और मराठी में है।"],
+          ["सटीकता कैसे सँभालते हैं", "जहाँ हो सके हम आधिकारिक स्रोत इस्तेमाल करते हैं। जिन आँकड़ों को हम सत्यापित नहीं कर पाए, उन्हें साफ़ तौर पर मोटा अनुमान या 'सत्यापन बाकी' लिखा गया है। फीस, पात्रता और तारीखें हर साल बदलती हैं, इसलिए हमेशा आधिकारिक वेबसाइट पर पुष्टि करें।"],
+          ["हम क्या नहीं करते", "हम प्रवेश, नौकरी, वेतन या पदोन्नति का वादा नहीं करते। करियर फाइंडर कोई वैज्ञानिक टेस्ट नहीं है और आपकी क्षमता या भविष्य नहीं बता सकता। हम आधार नंबर या दूसरी संवेदनशील निजी जानकारी नहीं माँगते।"],
+          ["कोई गलती मिली?", "जानकारी पुरानी या गलत हो सकती है। कोई भी फ़ैसला लेने से पहले आधिकारिक स्रोत जाँचें और शिक्षक, काउंसलर या किसी भरोसेमंद व्यक्ति से बात करें।"]
+        ]
+      },
+      mr: {
+        title: "CareerSaathi बद्दल",
+        sub: "भारतातील प्रत्येक विद्यार्थ्यासाठी मोफत करिअर मार्गदर्शन.",
+        boxes: [
+          ["आम्ही का आहोत", "अनेक विद्यार्थ्यांना, विशेषतः सर्वसाधारण आणि कमी उत्पन्न असलेल्या कुटुंबांतील मुलांना, करिअर समुपदेशकापर्यंत पोहोचता येत नाही. CareerSaathi दहावी, बारावी आणि पदवीनंतरचे पर्याय सोप्या भाषेत, मोफत समजावून सांगते."],
+          ["इथे तुम्हाला काय मिळेल", "अभ्यासक्रम आणि करिअर, त्यांना लागणारा वेळ, ढोबळ फी, कमाईची उदाहरणे, पायरी-पायरीचे रोडमॅप आणि अधिकृत वेबसाइट्सचे दुवे. माहिती इंग्रजी, हिंदी आणि मराठीत उपलब्ध आहे."],
+          ["अचूकता कशी सांभाळतो", "शक्य तिथे आम्ही अधिकृत स्रोत वापरतो. ज्या आकड्यांची आम्ही पडताळणी करू शकलो नाही ते स्पष्टपणे ढोबळ अंदाज किंवा 'पडताळणी बाकी' असे लिहिलेले आहेत. फी, पात्रता आणि तारखा दरवर्षी बदलतात, म्हणून नेहमी अधिकृत वेबसाइटवर खात्री करा."],
+          ["आम्ही काय करत नाही", "आम्ही प्रवेश, नोकरी, पगार किंवा पदोन्नतीचे आश्वासन देत नाही. करिअर फाइंडर ही वैज्ञानिक चाचणी नाही आणि ती तुमची क्षमता किंवा भविष्य सांगू शकत नाही. आम्ही आधार क्रमांक किंवा इतर संवेदनशील वैयक्तिक माहिती मागत नाही."],
+          ["चूक आढळली का?", "माहिती जुनी किंवा चुकीची असू शकते. कोणताही निर्णय घेण्यापूर्वी अधिकृत स्रोत तपासा आणि शिक्षक, समुपदेशक किंवा विश्वासू व्यक्तीशी बोला."]
+        ]
+      }
+    };
+
+    function renderPage() {
+      var a = ABOUT[currentLang] || ABOUT.en;
+      document.title = a.title + " - CareerSaathi";
+      document.getElementById("p-title").textContent = a.title;
+      document.getElementById("p-sub").textContent = a.sub;
+      document.getElementById("content").innerHTML = a.boxes.map(function (b) {
+        return '<div class="detail-box"><h2>' + b[0] + '</h2><p>' + b[1] + '</p></div>';
+      }).join("");
+    }
+
+    buildLangSwitcher();
+    applyStatic();
+    renderPage();
+  </script>
+</body>
+</html>
