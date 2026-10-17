@@ -229,3 +229,6 @@ function pick(obj) { return obj[currentLang] || obj.en; }
 A10_T.en.key.push("See also: <a href='roadmaps.html'><strong>Career roadmaps (for example, IPS to Commissioner of Police)</strong></a>");
 A10_T.hi.key.push("यह भी देखें: <a href='roadmaps.html'><strong>करियर रोडमैप (जैसे IPS से पुलिस कमिश्नर तक)</strong></a>");
 A10_T.mr.key.push("हेही पहा: <a href='roadmaps.html'><strong>करिअर रोडमॅप (उदा. IPS ते पोलीस आयुक्त)</strong></a>");
+A10_T.en.key.push("See also: <a href='professions.html'><strong>Professions and roadmaps (Doctor, Advocate and more)</strong></a>");
+A10_T.hi.key.push("यह भी देखें: <a href='professions.html'><strong>प्रोफ़ेशन और रोडमैप (डॉक्टर, वकील और अन्य)</strong></a>");
+A10_T.mr.key.push("हेही पहा: <a href='professions.html'><strong>व्यवसाय आणि रोडमॅप (डॉक्टर, वकील आणि इतर)</strong></a>");
