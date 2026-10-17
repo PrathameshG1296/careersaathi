@@ -1,0 +1,72 @@
+# CareerSaathi
+
+Free, India-focused career guidance for students (Class 10, Class 12, graduation).
+Languages: English, Hindi (हिन्दी), Marathi (मराठी).
+Status: prototype. All career numbers are rough estimates marked "needs verification".
+
+## How it is built (no build tools needed)
+
+- Plain HTML, CSS and JavaScript files. No framework, no database yet.
+- Hosted free on GitHub Pages (Settings > Pages > Deploy from branch `main`, folder `/`).
+- To change the site: edit a file on GitHub and commit. The site updates in 1-3 minutes.
+- Hard refresh the browser (Ctrl + Shift + R) to see changes.
+
+## Golden rules for content
+
+1. Never invent fees, salaries, eligibility, dates or links. If it cannot be verified, say so in the text.
+2. Prefer official sources (government portals, exam bodies, university sites).
+3. Keep `verified: "needs-verification"` until checked against an official source. Then set `lastChecked`.
+4. Every text must exist in English, Hindi and Marathi. Use `L("English", "हिन्दी", "मराठी")`.
+5. Do not claim guaranteed admission, jobs or salary.
+
+## File map
+
+| File | What it is |
+|---|---|
+| `index.html` | Home page with the 9 stage cards |
+| `careers.html`, `career.html` | Sample career list and detail page |
+| `careers-data.js`, `careers-hi.js`, `careers-mr.js`, `career-extra.js` | Data for the sample careers (English, Hindi, Marathi, and ITI extras) |
+| `finder.html`, `finder-data.js` | Rule-based Career Finder quiz (no AI) |
+| `after10.html`, `after10-data.js` | "After Class 10": Arts, Commerce, Science, Diploma, ITI paths |
+| `iti.html`, `iti-data.js` | ITI trades, fees, pay |
+| `diploma.html`, `diploma-data.js` | Diploma courses, fees, pay |
+| `states.html`, `states-data.js` | State-wise ITI information (only Maharashtra verified so far) |
+| `roadmaps.html`, `roadmaps-data.js` | Long roadmaps (IPS to Commissioner of Police) |
+| `professions.html`, `profession.html`, `professions-data.js` | **Main system for professions: ALL profession data is in `professions-data.js`** |
+| `about.html` | About page |
+| `i18n.js` | Language engine, language dropdown and shared menu text |
+| `style.css`, `careers.css` | Styling |
+
+## How language works
+
+- `i18n.js` defines the languages (`LANGS`), the shared text (`UI.en`, `UI.hi`, `UI.mr`) and `t("key")`.
+- The chosen language is saved in the browser (`localStorage`, key `cs_lang`).
+- Elements with `data-i18n="key"` are translated automatically.
+- Page specific text lives in that page's data file as English/Hindi/Marathi sets.
+- To add a language (for example Tamil): add it to `LANGS`, add `UI.ta`, and add a `ta` entry wherever `en`, `hi`, `mr` appear. Missing text falls back to English.
+
+## How to add a new profession (the common task)
+
+1. Open `professions-data.js`.
+2. Copy one whole block inside `var PROFESSIONS = [ ... ]` (for example the `doctor` block).
+3. Paste it after the last block (add a comma between blocks).
+4. Change `id` (unique, lowercase), `name`, `streams`, `summary`, `with40`, `steps`, `pay`, `alternatives`, `links`, `lastChecked`.
+5. Each step can have: `title`, `duration`, `marks`, `exam`, `fees`, `note`. Leave out any you do not need.
+6. Commit. The new profession appears automatically on `professions.html`.
+
+Field meanings are written at the top of `professions-data.js`.
+
+## Planned next steps
+
+- Move content from files to a Supabase database with an admin panel, so content can be edited without touching code. Suggested table `careers` fields: id, title, slug, category, education_level, eligibility, course_duration, estimated_fee_min, estimated_fee_max, required_skills, career_options, next_steps, official_source_url, verification_status, last_verified_at, published, created_at, updated_at.
+- Row Level Security: public can read only `published = true`. Only authorised admins can write.
+- Never put secret or service-role keys in this repository (it is public).
+- Add PWA support (manifest + service worker) so students can install it on their phone.
+
+## Testing checklist before each release
+
+- Every page opens (no 404) and every menu link works.
+- Language dropdown switches English, Hindi, Marathi on every page and the choice is remembered.
+- Mobile layout is readable. Tables scroll sideways.
+- Every external link opens the official site.
+- Disclaimer is present in the footer.
